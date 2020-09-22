@@ -51,7 +51,7 @@ for line in readfile:
                         put_data = {"ipsPolicy": {
     "type": "IntrusionPolicy",
     "id": "b4826546-3cfb-11e8-8ca1-da7922d60f71",
-    "name": "UWA-Inspection_Policy"
+    "name": "Inspection_Policy"
   }}
                         data_json.update(put_data)
                     else:

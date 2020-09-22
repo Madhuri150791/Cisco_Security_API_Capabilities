@@ -28,12 +28,7 @@ for line in readfile:
                             del data["commentHistoryList"]
                             data.update(putdata)
                         #print(comment)
-                    if "~" in data["name"]:
-                        name=data["name"].replace("~","")
-                        del data["name"]
-                        putdata=""
-                        putdata={"name":name}
-                        data.update(putdata)
+                   
                     writefile.write(str(data))
                     writefile.write("\n")
         

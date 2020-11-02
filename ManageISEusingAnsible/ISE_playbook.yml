@@ -1,0 +1,30 @@
+---
+  hosts: all
+  gather_facts: no
+  connection: local
+  # Setting variable for this App
+  vars:
+    destination_host: x.x.x.x
+    deestination_port: 9060
+    resource_path: ers/config/networkdevice
+    
+  #Running tasks
+ 
+  tasks:
+    - name: REST API Call
+      uri: 
+          url: https://{{destination_host}}:{{deestination_port}}/{{resource_path}}
+          method: GET
+          headers: {Accept: "application/json", Content-Type: "application/json"}
+          validate_certs: no
+          user: xxxx
+          password: xxxx
+          force: yes
+          force_basic_auth: yes
+      register: rest_post
+      ignore_errors: no
+      
+      
+    - name: Output from ISE
+      debug:
+        var: rest_psot

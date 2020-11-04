@@ -8,11 +8,11 @@ import requests
 import csv
 import time
 ###Please provide the details here before running the script################################################################################
-server = "https://47.47.7.131"
-username = "admin"
-password = "Admin123"
-domain_uuid="e276abec-e0f2-11e3-8169-6d9ed49b625f"
-accesspolicy_uuid="00505680-8475-0ed3-0000-034359828584"
+server = input("Enter FMC IP: ")
+username = input("Enter Username: ")
+password = getpass.getpass("Enter Password",stream=sys.stdout)
+domain_uuid =""
+accesspolicy_uuid =input("Enter Access Policy UUID:")
 
 #########################################################################################################################################
 r = None
@@ -24,6 +24,7 @@ try:
                       verify=False)
     auth_headers = r.headers
     auth_token = auth_headers.get('X-auth-access-token', default=None)
+    domain_uuid = auth_headers.get('DOMAIN_UUID', default=None)
     if auth_token == None:
         print("auth_token not found. Exiting...")
         sys.exit()

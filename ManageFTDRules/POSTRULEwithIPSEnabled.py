@@ -1,5 +1,4 @@
 
-
 import json
 import sys
 import csv
@@ -7,25 +6,24 @@ import requests
 import time
 
 import getpass
-print("Keying the FMC IP: ")
-server = input()
-username = getpass.getuser()
-password = getpass.getpass()
-print("Paste your Domain UUID here: ")
-domain_uuid=input()
-print("Paste your Access Policy UUID here: ")
-accesspolicy_uuid=input()
+
+server = input("Enter FMC IP: ")
+username = input("Enter Username: ")
+password = getpass.getpass("Enter Password",stream=sys.stdout)
+domain_uuid =""
+accesspolicy_uuid =input("Enter Access Policy UUID:")
 
 r = None
 headers = {'Content-Type': 'application/json'}
 api_auth_path = "/api/fmc_platform/v1/auth/generatetoken"
-auth_url = server + api_auth_path
+auth_url = "http://"+server + api_auth_path
 try:
     print("Generating Authentication Token...................")
     r = requests.post(auth_url, headers=headers, auth=requests.auth.HTTPBasicAuth(username, password),
                       verify=False)
     auth_headers = r.headers
     auth_token = auth_headers.get('X-auth-access-token', default=None)
+    domain_uuid = auth_headers.get('DOMAIN_UUID', default=None)
     if auth_token == None:
         print("auth_token not found. Exiting...")
         sys.exit()
@@ -34,6 +32,7 @@ except Exception as err:
     sys.exit()
 
 headers['X-auth-access-token'] = auth_token
+
 
 
 

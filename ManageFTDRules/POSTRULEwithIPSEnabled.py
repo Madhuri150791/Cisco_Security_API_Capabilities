@@ -1,6 +1,4 @@
-#
-# Generated FMC REST API sample script
-#
+
 
 import json
 import sys
@@ -8,11 +6,15 @@ import csv
 import requests
 import time
 
-server = "https://47.47.7.131"
-username = "admin"
-password = "Admin123"
-domain_uuid="e276abec-e0f2-11e3-8169-6d9ed49b625f"
-accesspolicy_uuid="00505680-8475-0ed3-0000-034360063609"
+import getpass
+print("Keying the FMC IP: ")
+server = input()
+username = getpass.getuser()
+password = getpass.getpass()
+print("Paste your Domain UUID here: ")
+domain_uuid=input()
+print("Paste your Access Policy UUID here: ")
+accesspolicy_uuid=input()
 
 r = None
 headers = {'Content-Type': 'application/json'}
